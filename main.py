@@ -8,15 +8,16 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
+from selenium.common.exceptions import StaleElementReferenceException, WebDriverException
 import os, time
-import os, time
-from selenium.common.exceptions import StaleElementReferenceException, WebDriverException  
+from dotenv import load_dotenv
 
-URL_LOGIN = "https://chamados.idxdatacenters.com.br/front/login.php"
-URL_TICKETS = "https://chamados.idxdatacenters.com.br/front/ticket.php"
+load_dotenv()
 
-USUARIO = os.getenv("GLPI_USER") or "zairo.cunha"
-SENHA   = os.getenv("GLPI_PASS") or "Zlrc731686-"
+URL_LOGIN = os.getenv("URL_LOGIN")
+URL_TICKETS = os.getenv("URL_TICKETS")
+USUARIO = os.getenv("GLPI_USER")
+SENHA = os.getenv("GLPI_PASS")
 
 def main():
     options = webdriver.ChromeOptions()
@@ -53,7 +54,7 @@ def main():
             try:
                 # Garante que o header existe antes de buscar o link
                 wait.until(EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/header")))
-                link_pre_tickets = WebDriverWait(driver, 5).until(
+                link_pre_tickets = WebDriverWait(driver, 20).until(
                     EC.element_to_be_clickable((By.XPATH, xpath_pre_tickets))
                 )
                 driver.execute_script("arguments[0].scrollIntoView({block:'center'});", link_pre_tickets)
@@ -93,10 +94,6 @@ def main():
             if txt:
                 ids_pre.append(txt)
 
-        with open("ids_tickets_mesa_atual.txt", "w", encoding="utf-8") as f:
-            for _id in ids_pre:
-                f.write(_id + "\n")
-
         # Clica no menu de Tickets
         xpath_pre_tickets = '/html/body/div[2]/header/div/ul/li[3]/a'
 
@@ -104,7 +101,7 @@ def main():
             try:
                 # Garante que o header existe antes de buscar o link
                 wait.until(EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/header")))
-                link_pre_tickets = WebDriverWait(driver, 5).until(
+                link_pre_tickets = WebDriverWait(driver, 20).until(
                     EC.element_to_be_clickable((By.XPATH, xpath_pre_tickets))
                 )
                 driver.execute_script("arguments[0].scrollIntoView({block:'center'});", link_pre_tickets)
@@ -144,10 +141,6 @@ def main():
             if txt:
                 ids_dc.append(txt)
 
-        with open("ids_tickets_mesa_atual.txt", "w", encoding="utf-8") as f:
-            for _id in ids_dc:
-                f.write(_id + "\n")
-
         # Entra novamente na lista de Tickets
         xpath_pre_tickets = '/html/body/div[2]/header/div/ul/li[3]/a'
 
@@ -155,7 +148,7 @@ def main():
             try:
                 # Garante que o header existe antes de buscar o link
                 wait.until(EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/header")))
-                link_pre_tickets = WebDriverWait(driver, 5).until(
+                link_pre_tickets = WebDriverWait(driver, 20).until(
                     EC.element_to_be_clickable((By.XPATH, xpath_pre_tickets))
                 )
                 driver.execute_script("arguments[0].scrollIntoView({block:'center'});", link_pre_tickets)
@@ -195,10 +188,6 @@ def main():
             if txt:
                 ids_infra.append(txt)
 
-        with open("ids_tickets_mesa_atual.txt", "w", encoding="utf-8") as f:
-            for _id in ids_infra:
-                f.write(_id + "\n")
-
         #Entra novamente na lista de Tickets
         xpath_pre_tickets = '/html/body/div[2]/header/div/ul/li[3]/a'
 
@@ -206,7 +195,7 @@ def main():
             try:
                 # Garante que o header existe antes de buscar o link
                 wait.until(EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/header")))
-                link_pre_tickets = WebDriverWait(driver, 5).until(
+                link_pre_tickets = WebDriverWait(driver, 20).until(
                     EC.element_to_be_clickable((By.XPATH, xpath_pre_tickets))
                 )
                 driver.execute_script("arguments[0].scrollIntoView({block:'center'});", link_pre_tickets)
@@ -246,10 +235,6 @@ def main():
             if txt:
                 ids_n1.append(txt)
 
-        with open("ids_tickets_mesa_atual.txt", "w", encoding="utf-8") as f:
-            for _id in ids_n1:
-                f.write(_id + "\n")
-
         # Entra novamente na lista de Tickets
         xpath_pre_tickets = '/html/body/div[2]/header/div/ul/li[3]/a'
 
@@ -257,7 +242,7 @@ def main():
             try:
                 # Garante que o header existe antes de buscar o link
                 wait.until(EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/header")))
-                link_pre_tickets = WebDriverWait(driver, 5).until(
+                link_pre_tickets = WebDriverWait(driver, 20).until(
                     EC.element_to_be_clickable((By.XPATH, xpath_pre_tickets))
                 )
                 driver.execute_script("arguments[0].scrollIntoView({block:'center'});", link_pre_tickets)
@@ -297,10 +282,6 @@ def main():
             if txt:
                 ids_noc.append(txt)
 
-        with open("ids_tickets_mesa_atual.txt", "w", encoding="utf-8") as f:
-            for _id in ids_noc:
-                f.write(_id + "\n")
-
         # Entra novamente na lista de Tickets
         xpath_pre_tickets = '/html/body/div[2]/header/div/ul/li[3]/a'
 
@@ -308,7 +289,7 @@ def main():
             try:
                 # Garante que o header existe antes de buscar o link
                 wait.until(EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/header")))
-                link_pre_tickets = WebDriverWait(driver, 5).until(
+                link_pre_tickets = WebDriverWait(driver, 20).until(
                     EC.element_to_be_clickable((By.XPATH, xpath_pre_tickets))
                 )
                 driver.execute_script("arguments[0].scrollIntoView({block:'center'});", link_pre_tickets)
@@ -348,10 +329,6 @@ def main():
             if txt:
                 ids_soc.append(txt)
 
-        with open("ids_tickets_mesa_atual.txt", "w", encoding="utf-8") as f:
-            for _id in ids_soc:
-                f.write(_id + "\n")
-
         # Entra novamente na lista de Tickets
         xpath_pre_tickets = '/html/body/div[2]/header/div/ul/li[3]/a'
 
@@ -359,7 +336,7 @@ def main():
             try:
                 # Garante que o header existe antes de buscar o link
                 wait.until(EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/header")))
-                link_pre_tickets = WebDriverWait(driver, 5).until(
+                link_pre_tickets = WebDriverWait(driver, 20).until(
                     EC.element_to_be_clickable((By.XPATH, xpath_pre_tickets))
                 )
                 driver.execute_script("arguments[0].scrollIntoView({block:'center'});", link_pre_tickets)
@@ -399,10 +376,6 @@ def main():
             if txt:
                 ids_tel.append(txt)
 
-        with open("ids_tickets_mesa_atual.txt", "w", encoding="utf-8") as f:
-            for _id in ids_tel:
-                f.write(_id + "\n")
-
         print(f"-> Pré - Tickets ({len(ids_pre)}): {ids_pre}") # Mostra os pré-tickets
         print(f"-> Tickets - DC ({len(ids_dc)}): {ids_dc}") # Mostra os tickets de DC
         print(f"-> Tickets - Infra ({len(ids_infra)}): {ids_infra}") # Mostra os tickets de Infra
@@ -410,6 +383,24 @@ def main():
         print(f"-> Tickets - NOC ({len(ids_noc)}): {ids_noc}") # Mostra os tickets de Infra
         print(f"-> Tickets - SOC ({len(ids_soc)}): {ids_soc}") # Mostra os tickets de Infra
         print(f"-> Tickets - Telefonia ({len(ids_tel)}): {ids_tel}") # Mostra os tickets de Infra
+
+        # Junta todos os IDs por categoria
+        todos_ids = {
+            "Pré-Tickets": ids_pre,
+            "DataCenter": ids_dc,
+            "Infra": ids_infra,
+            "N1": ids_n1,
+            "NOC": ids_noc,
+            "SOC": ids_soc,
+            "Telefonia": ids_tel
+        }
+
+        # Cria apenas UM arquivo no final
+        with open("ids_todos_tickets.txt", "w", encoding="utf-8") as f:
+            for categoria, ids in todos_ids.items():
+                f.write(f"\n### {categoria} ({len(ids)}) ###\n")
+                for _id in ids:
+                    f.write(_id + "\n")
 
     finally:
         driver.quit()
