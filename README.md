@@ -25,9 +25,5 @@ Automatizar a coleta de informações do **GLPI** (chamados, usuários, inventá
 ```bash
 .
 ├── main.py               # Script principal da automação
-├── glpi_client.py        # Módulo para comunicação com a API/robô GLPI
-├── utils.py              # Funções auxiliares (tratamento, logs, etc.)
-├── requirements.txt      # Dependências do projeto
-└── README.md             # Documentação
 
 
