@@ -24,6 +24,8 @@ Automatizar a coleta de informações do **GLPI** (chamados, usuários, inventá
 ## ⚙️ Estrutura do Projeto
 ```bash
 .
-├── main.py               # Script principal da automação
-
+├── tickets_geral.py               # Script para puxar todos os tickets abertos no DataCenter
+├── tickets_nao_atribuidos.py      # Script para puxar todos os tickets não atribuídos
+├── tickets_nao_atendidos.py       # Script para puxar todos os tickets não atendidos
+├── tickets_vencidos               # Script para puxar todos os tickets vencidos
 

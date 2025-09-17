@@ -1,2 +1,5 @@
 .env
-ids_todos_tickets.txt
+ids_tickets.txt
+ids_tickets_nao_atribuidos.txt
+ids_tickets_nao_atendidos.txt
+ids_tickets_vencidos.txt
